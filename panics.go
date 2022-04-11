@@ -12,19 +12,17 @@ func printAllGames(){
 	}
 }
 
-func checkUserInput(result int) error {
-
-	if result > len(boardGames) || result < 0 {
-		return errors.New("Invalid selection!")
+func checkUserInput(result int) {
+	if result >= len(boardGames) || result < 0 {
+		panic(errors.New("Invalid selection!"))
 	}
-	return nil
 }
 
 var boardGames = []string{"Carcassone", "Wildlife Safari", "Civilization"}
-var userInput string
 
 func main() {
-	var msg string
+	var userInput string
+
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Printf("Trapped panic: %s (%T) \n", err, err)
@@ -38,8 +36,9 @@ func main() {
 	fmt.Println("What is your favorite game?")
 	fmt.Scanln(&userInput)
 
-	result, _ := (strconv.Atoi(userInput) - 1)
-
+	userInputInt, _ := strconv.Atoi(userInput)
+	result := userInputInt - 1
+	checkUserInput(result)
 
 
 	fmt.Println("Oh I see. So your favorite game is:", boardGames[result])
