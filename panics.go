@@ -29,7 +29,8 @@ func main() {
 		}
 	}()
 
-	fmt.Println("The boardGames are : \n")
+	fmt.Println("\nThe boardGames are : ")
+	fmt.Println("")
 
 	printAllGames()
 
